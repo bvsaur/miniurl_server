@@ -15,7 +15,9 @@ func main() {
 	//* Middleware
 	e.Logger.SetLevel(log.ERROR)
 	e.Use(middleware.Logger())
-	e.Use(middleware.CORS())
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{config.GetEnv("CORS_ORIGIN")},
+	}))
 
 	//* Routes
 	jwtConfig := middleware.JWTConfig{

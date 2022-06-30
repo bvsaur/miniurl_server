@@ -28,8 +28,8 @@ func CreateMini(c echo.Context) error {
 	mini.UserID = uint(userID.(float64))
 
 	var count int64
-	database.DB.Model(&models.Mini{}).Where("ID = ?", userID).Count(&count)
-	if count <= 10 {
+	database.DB.Model(&models.Mini{}).Where("user_id = ?", userID).Count(&count)
+	if count < 10 {
 		database.DB.Create(&mini)
 		mini.Mini = libs.EncodeBase62(mini.ID)
 		return c.JSON(http.StatusOK, echo.Map{"mini": mini})

@@ -11,5 +11,6 @@ func GetEnv(key string) string {
 	if err != nil {
 		return ""
 	}
+
 	return os.Getenv(key)
 }
